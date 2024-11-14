@@ -37,5 +37,5 @@ public partial class Prestamo
 
     [ForeignKey("UsuarioId")]
     [InverseProperty("Prestamos")]
-    public virtual Usuario Usuario { get; set; } = null!;
+    public virtual AplicationUser Usuario { get; set; } = null!;
 }

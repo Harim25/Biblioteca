@@ -20,5 +20,5 @@ public partial class GeneroUsuario
     public string Genero { get; set; } = null!;
 
     [InverseProperty("Genero")]
-    public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
+    public virtual ICollection<AplicationUser> Usuarios { get; set; } = new List<AplicationUser>();
 }

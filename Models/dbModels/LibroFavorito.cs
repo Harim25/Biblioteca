@@ -27,5 +27,5 @@ public partial class LibroFavorito
 
     [ForeignKey("UsuarioId")]
     [InverseProperty("LibroFavoritos")]
-    public virtual Usuario Usuario { get; set; } = null!;
+    public virtual AplicationUser Usuario { get; set; } = null!;
 }
