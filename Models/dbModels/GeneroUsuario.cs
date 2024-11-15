@@ -12,7 +12,7 @@ public partial class GeneroUsuario
 {
     [Key]
     [Column("id")]
-    public byte Id { get; set; }
+    public int Id { get; set; }
 
     [Column("genero")]
     [StringLength(50)]

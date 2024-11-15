@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Biblioteca.Models.dbModels;
 
-public partial class BibliotecaContext : IdentityDbContext
+public partial class BibliotecaContext : IdentityDbContext<AplicationUser, IdentityRole<int>, int>
 {
     public BibliotecaContext()
     {
@@ -31,12 +31,9 @@ public partial class BibliotecaContext : IdentityDbContext
 
     public virtual DbSet<Prestamo> Prestamos { get; set; }
 
-    public virtual DbSet<Rol> Rols { get; set; }
-
-    public virtual DbSet<Usuario> Usuarios { get; set; }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Autor>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__autor__3213E83FC7B26D30");
@@ -115,27 +112,6 @@ public partial class BibliotecaContext : IdentityDbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__prestamo__usuari__45F365D3");
         });
-
-        modelBuilder.Entity<Rol>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__rol__3213E83F381E914D");
-
-            entity.Property(e => e.Id).ValueGeneratedOnAdd();
-        });
-
-        modelBuilder.Entity<Usuario>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__usuario__3213E83F76DF6378");
-
-            entity.HasOne(d => d.Genero).WithMany(p => p.Usuarios)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__usuario__generoI__46E78A0C");
-
-            entity.HasOne(d => d.Rol).WithMany(p => p.Usuarios)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__usuario__rolId__47DBAE45");
-        });
-
         OnModelCreatingPartial(modelBuilder);
     }
 
