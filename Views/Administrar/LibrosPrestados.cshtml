@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Administrar libros prestados";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/administrar-elementos.css" />
+}
+
+@section Scripts {
+    <script src="~/js/administrar-libros-prestados.js"></script>
+}
+
+<h1>Administrar libros prestados</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Inicio</th>
+            <th scope="col">Fin</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Libro</th>
+            <th scope="col">¿Ya se prestó?</th>
+            <th scope="col">¿Ya fue entregado?</th>
+        </tr>
+    </thead>
+    <tbody id="contenido">
+    </tbody>
+</table>

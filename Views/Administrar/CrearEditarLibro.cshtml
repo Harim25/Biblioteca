@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Crear o editar libro";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/vista-elementos.css" />
+}
+
+@section Scripts {
+    <!-- Bytescale -->
+    <script src="https://js.bytescale.com/sdk/v3"></script>
+    <script src="~/js/crear-editar-libro.js"></script>
+}
+
+<h1>Crear o editar libro</h1>
+<div class="elementos">
+    <figure>
+        <img src="~/Images/libro-default.png" alt="Libro" class="libro" id="bookImage" style="cursor: pointer;">
+        <figcaption class="mt-2" id="captionText">Añade la portada del libro</figcaption>
+    </figure>
+    <input type="file" id="fileInput" onchange="onFileSelected(event)" />
+    <div class="contenido">
+        <h2>Titulo:</h2>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Titulo del libro" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <h2>Autor:</h2>
+        <div class="input-group mb-3">
+            <select class="form-select" id="autores">
+                <option selected>Selecciona un autor</option>
+            </select>
+        </div>
+        <h2>Género:</h2>
+        <div class="input-group mb-3">
+            <select class="form-select" id="generos">
+                <option selected>Selecciona un género</option>
+            </select>
+        </div>
+        <h2>Editorial:</h2>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Escribe la editorial" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <h2>Cantidad:</h2>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Escribe una cantidad" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+    </div>
+</div>
+<div class="mt-4">
+    <h2>Sinopsis:</h2>
+    <div class="input-group">
+        <textarea class="form-control" placeholder="Redacta la trama del libro" aria-label="With textarea" oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"></textarea>
+    </div>
+</div>
+<div class="divBtn mt-4">
+    <a href="administrar-catalogo.html" type="button" class="btn btn-lg btn-dark">Hecho</a>
+</div>

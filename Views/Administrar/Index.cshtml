@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Administrar";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/administrar.css" />
+}
+
+<h1>Administrar</h1>
+<div id="contbtns">
+    <a asp-controller="Administrar" asp-action="Catalogo" type="button" class="btns btn btn-dark">
+        Catálogo
+    </a>
+    <a asp-controller="Administrar" asp-action="Autores" type="button" class="btns btn btn-dark">
+        Autores
+    </a>
+    <a asp-controller="Administrar" asp-action="Generos" type="button" class="btns btn btn-dark">
+        Géneros
+    </a>
+    <a asp-controller="Administrar" asp-action="Usuarios" type="button" class="btns btn btn-dark">
+        Usuarios
+    </a>
+    <a asp-controller="Administrar" asp-action="LibrosPrestados" type="button" class="btns btn btn-dark">
+        Libros prestados
+    </a>
+</div>

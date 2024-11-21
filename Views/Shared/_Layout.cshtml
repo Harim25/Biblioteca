@@ -1,50 +1,191 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Biblioteca</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Biblioteca.styles.css" asp-append-version="true" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <!-- NavBar, SideBar, COntenido, Footer -->
+    <link rel="stylesheet" href="~/css/general.css" asp-append-version="true" />
+    <!-- CSS personalizado -->
+    @await RenderSectionAsync("Styles", required: false)
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Gilda+Display&family=Jacquarda+Bastarda+9&family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Icono de pestaña -->
+    <link rel="icon" href="~/images/Logo-icono.png" type="image/png">
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Biblioteca</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body fixed-top" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                <img src="~/images/Logo-icono.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                Biblioteca "El Búho"
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="colapsado">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"] as string == "Home" ? "active" : "")" asp-controller="Home" asp-action="Index">
+                                <i class="bi @(ViewContext.RouteData.Values["controller"] as string == "Home" ? "bi-house-door-fill" : "bi-house-door")"></i> Inicio
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"] as string == "Explorar" ? "active" : "")" asp-controller="Explorar" asp-action="Index">
+                                <i class="bi @(ViewContext.RouteData.Values["controller"] as string == "Explorar" ? "bi-bookmarks-fill" : "bi-bookmarks")"></i> Explorar
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"] as string == "Catalogo" ? "active" : "")" asp-controller="Catalogo" asp-action="Index">
+                                <i class="bi @(ViewContext.RouteData.Values["controller"] as string == "Catalogo" ? "bi-book-fill" : "bi-book")"></i> Catálogo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"] as string == "Coleccion" ? "active" : "")" asp-controller="Coleccion" asp-action="Index">
+                                <i class="bi @(ViewContext.RouteData.Values["controller"] as string == "Coleccion" ? "bi-star-fill" : "bi-star")"></i> Colección
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"] as string == "EnPosesion" ? "active" : "")" asp-controller="EnPosesion" asp-action="Index">
+                                <i class="bi @(ViewContext.RouteData.Values["controller"] as string == "EnPosesion" ? "bi-journal-bookmark-fill" : "bi-journal-bookmark")"></i> En posesión
+                            </a>
+                        </li>
+                        <li class="nav-item admin">
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"] as string == "Administrar" ? "active" : "")" asp-controller="Administrar" asp-action="Index">
+                                <i class="bi @(ViewContext.RouteData.Values["controller"] as string == "Administrar" ? "bi-pencil-fill" : "bi-pencil")"></i> Administrar
+                            </a>
+                        </li>
+                        <li class="nav-item admin">
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"] as string == "CanjearCodigo" ? "active" : "")" asp-controller="CanjearCodigo" asp-action="Index">
+                                <i class="bi bi-input-cursor"></i> Canjear código
+                            </a>
+                        </li>
+                        <li class="nav-item admin">
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"] as string == "Estadisticas" ? "active" : "")" asp-controller="Estadisticas" asp-action="Index">
+                                <i class="bi @(ViewContext.RouteData.Values["controller"] as string == "Estadisticas" ? "bi-bar-chart-fill" : "bi-bar-chart")"></i> Estadísticas
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots"></i> Más acciones
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="acerca">Acerca de la biblioteca</a></li>
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="encontrar-libro">¿Cómo encontrar un libro?</a></li>
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="">¿Cómo pedir un libro?</a></li>
+                            </ul>
                         </li>
                     </ul>
-                    <partial name="_LoginPartial" />
+                </div>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
+            <div class="position-absolute top-0 end-0">
+                <a asp-controller="Home" asp-action="">
+                    <img src="~/images/perfil-default.png" alt="Perfil" class="profile-img rounded-circle me-2 mt-2">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="principal">
+        <!-- Contenido -->
+        <div class="contenedor">
+            @RenderBody()
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-dark-subtle mt-5 pt-5" data-bs-theme="dark">
+            <div class="container-fluid">
+                <div class="container text-center">
+                    <div class="row align-items-start">
+                        <div class="col">
+                            <a class="navbar-brand" asp-controller="Home" asp-action="Index"></a>
+                            <img src="~/images/Logo.png" alt="Logo">
+                            </a>
+                        </div>
+                        <div class="col">
+                            <h5>Contacto</h5>
+                            <p>
+                                Correo electrónico: <small class="text-body-secondary">contacto@bibliotecaelbuho.com</small>
+                            </p>
+                            <p>Telefono: <small class="text-body-secondary">8123456789</small></p>
+                        </div>
+                        <div class="col">
+                            <p>
+                                Página hecha con mucho esfuezo y dedicación, haciendo uso de todos los conocimientos que se
+                                han adquirido durante el semestre.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </footer>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - Biblioteca - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <!-- SideBar -->
+    <div class="sidebar fixed-top">
+        <img src="~/images/Logo.png" alt="Logo" class="logo position-absolute top-0 start-50 translate-middle">
+        <div>
+            <a asp-controller="Home" asp-action="Index">
+                <h4><i class="bi @(ViewContext.RouteData.Values["controller"] as string == "Home" ? "bi-house-door-fill" : "bi-house-door")"></i> Inicio</h4>
+            </a>
+            <a asp-controller="Explorar" asp-action="Index">
+                <h4><i class="bi @(ViewContext.RouteData.Values["controller"] as string == "Explorar" ? "bi-bookmarks-fill" : "bi-bookmarks")"></i> Explorar</h4>
+            </a>
+            <a asp-controller="Catalogo" asp-action="Index">
+                <h4><i class="bi @(ViewContext.RouteData.Values["controller"] as string == "Catalogo" ? "bi-book-fill" : "bi-book")"></i> Catálogo</h4>
+            </a>
+            <a asp-controller="Coleccion" asp-action="Index">
+                <h4><i class="bi @(ViewContext.RouteData.Values["controller"] as string == "Coleccion" ? "bi-star-fill" : "bi-star")"></i> Colección</h4>
+            </a>
+            <a asp-controller="EnPosesion" asp-action="Index">
+                <h4><i class="bi @(ViewContext.RouteData.Values["controller"] as string == "EnPosesion" ? "bi-journal-bookmark-fill" : "bi-journal-bookmark")"></i> En posesión</h4>
+            </a>
+            <a asp-controller="Administrar" asp-action="Index" class="admin">
+                <h4><i class="bi @(ViewContext.RouteData.Values["controller"] as string == "Administrar" ? "bi-pencil-fill" : "bi-pencil")"></i> Administrar</h4>
+            </a>
+            <a asp-controller="CanjearCodigo" asp-action="Index">
+                <h4><i class="bi bi-input-cursor"></i> Canjear código</h4>
+            </a>
+            <a asp-controller="Estadisticas" asp-action="Index" class="admin">
+                <h4><i class="bi @(ViewContext.RouteData.Values["controller"] as string == "Estadisticas" ? "bi-bar-chart-fill" : "bi-bar-chart")"></i> Estadísticas</h4>
+            </a>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+        <div class="position-absolute bottom-0 start-0 ms-3 mb-4">
+            <a asp-controller="Home" asp-action="acerca">
+                <h6>Acerca de la biblioteca</h6>
+            </a>
+            <a asp-controller="Home" asp-action="encontrar-libro">
+                <h6>¿Cómo encontrar un libro?</h6>
+            </a>
+            <a asp-controller="Home" asp-action="">
+                <h6>¿Cómo pedir un libro?</h6>
+            </a>
+        </div>
+    </div>
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- General -->
+    <script src="~/js/general.js" asp-append-version="true"></script>
+    <!-- Script personalizado -->
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>
