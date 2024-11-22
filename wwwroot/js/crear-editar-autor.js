@@ -31,3 +31,5 @@ const onFileSelected = async (event) => {
         captionText.textContent = "Error al subir la imagen. Intente nuevamente.";
     }
 }
+
+//todo esto es para comunicarse con la api de bytescale

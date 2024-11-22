@@ -1,5 +1,6 @@
 $(document).ready(function () {
     for (let i = 0; i < 50; i++) {
+        //para el estatico, esta es la plantilla
         let objeto = `
                 <tr>
                     <th scope="row">${i + 1}</th>

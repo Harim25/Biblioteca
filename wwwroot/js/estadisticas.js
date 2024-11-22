@@ -185,6 +185,7 @@ window.addEventListener('resize', myChart3.resize);
 
 $(document).ready(function () {
     for (let i = 0; i < 50; i++) {
+        //para el estatico, esta es la plantilla
         let edad = `
                 <tr>
                     <td>${i}</td>
@@ -195,6 +196,7 @@ $(document).ready(function () {
         $("#tablaedades").append(edad)
     }
     for (let i = 0; i < 50; i++) {
+        //para el estatico, esta es la plantilla
         let pedido = `
                 <tr>
                     <td>${i}</td>
@@ -207,6 +209,7 @@ $(document).ready(function () {
         $("#tablapedidos").append(pedido)
     }
     for (let i = 0; i < 50; i++) {
+        //para el estatico, esta es la plantilla
         let gustadolibro = `
                 <tr>
                     <td>${i}</td>
@@ -219,6 +222,7 @@ $(document).ready(function () {
         $("#tablagustadoslibros").append(gustadolibro)
     }
     for (let i = 0; i < 50; i++) {
+        //para el estatico, esta es la plantilla
         let gustadoautor = `
                 <tr>
                     <td>${i}</td>

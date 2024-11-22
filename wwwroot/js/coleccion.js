@@ -1,5 +1,6 @@
 $(document).ready(function () {
     for (let i = 0; i < 8; i++) {
+        //para el estatico, esta es la plantilla
         let libro = `
                 <div class="card">
                     <a href="vista-libro.html" class="card-link">
@@ -13,6 +14,7 @@ $(document).ready(function () {
         $("#libros").append(libro)
     }
     for (let i = 0; i < 7; i++) {
+        //para el estatico, esta es la plantilla
         let autor = `
                 <div class="card border-0">
                     <a href="" class="card-link">

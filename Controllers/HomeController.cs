@@ -17,6 +17,18 @@ namespace Biblioteca.Controllers
         {
             return View();
         }
+        public IActionResult AccesoDenegado()
+        {
+            return View();
+        }
+        public IActionResult ResultadoBusqueda()
+        {
+            return View();
+        }
+        public IActionResult VistaLibro()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {

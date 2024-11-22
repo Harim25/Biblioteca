@@ -14,6 +14,7 @@ $(document).ready(function () {
         } else {
             entregadoText = "btn-danger"
         }
+        //para el estatico, esta es la plantilla
         let objeto = `
                 <tr>
                     <th scope="row">${i + 123456}</th>

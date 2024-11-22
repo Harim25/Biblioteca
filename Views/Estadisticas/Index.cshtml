@@ -9,8 +9,6 @@
 @section Scripts {
     <!-- Apache Echarts -->
     <script src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
-    <!-- JQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="~/js/estadisticas.js"></script>
 }
 
@@ -21,10 +19,11 @@
         <div class="row">
             <div class="column">
                 <h6 class="mb-2">Cantidad de usuarios:</h6>
-                <p class="ms-4">Administradores: #<br>Lectores: #</p>
+                <p class="ms-4">Administradores: #<!-- Cantidad --><br>Lectores: #<!-- Cantidad --></p>
                 <h6 class="mb-2">Género:</h6>
-                <p class="ms-4">Hombres: #<br>Mujeres: #</p>
-                <h6 class="mb-2">Edad promedio: 30 años</h6>
+                <p class="ms-4">Hombres: #<!-- Cantidad --><br>Mujeres: <!-- Cantidad --></p>
+                <h6 class="mb-2">Edad promedio: 30<!-- Cantidad, puede sacarse el promedio de la consulta de las edades --> años</h6>
+                <!-- Aqui el grafico es con js, se deberia de modificar para pasarle los datos y hacer el grafico con eso -->
                 <div id="graficoedades"></div>
             </div>
             <div class="column">
@@ -38,6 +37,7 @@
                             </tr>
                         </thead>
                         <tbody id="tablaedades">
+                            <!-- Consulta de todas las edades y la cantidad de usuarios de cada una -->
                         </tbody>
                     </table>
                 </div>
@@ -62,12 +62,14 @@
                             </tr>
                         </thead>
                         <tbody id="tablapedidos">
+                            <!-- Consulta de los libros mas pedidos y ordenados de mayor a menor, arriba estan los datos que se piden de cada elemento, pedidos es la cantidad de veces que se pidio ese libro, son solo los del ultimo mes  -->
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="column">
                 <h6 class="mb-2">Géneros:</h6>
+                <!-- Otro grafico -->
                 <div id="graficopedidos"></div>
             </div>
         </div>
@@ -90,12 +92,14 @@
                             </tr>
                         </thead>
                         <tbody id="tablagustadoslibros">
+                            <!-- Otra consulta, tambien solo del ultimo mes -->
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="column">
                 <h6 class="mb-2">Géneros:</h6>
+                <!-- Otro grafico -->
                 <div id="graficogustadoslibros"></div>
             </div>
         </div>
@@ -114,6 +118,7 @@
                     </tr>
                 </thead>
                 <tbody id="tablagustadosautores">
+                    <!-- Otra consulta, igual, del ultimo mes -->
                 </tbody>
             </table>
         </div>

@@ -11,3 +11,5 @@ document.querySelector(".btn-outline-success").addEventListener("click", functio
     event.preventDefault()
     window.location.href = "resultado-busqueda.html"
 })
+
+//esto nomas sirve para que los lectores no accedan a las funciones de admin, si hay una mejor manera tocaria reemplazarlo

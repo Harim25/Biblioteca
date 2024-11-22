@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Crear o editar cuenta";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/vista-elementos.css" />
+    <link rel="stylesheet" href="~/css/crear-editar-cuenta.css" />
+}
+
+@section Scripts {
+    <!-- Bytescale -->
+    <script src="https://js.bytescale.com/sdk/v3"></script>
+    <script src="~/js/crear-editar-cuenta.js"></script>
+}
+
+<div class="elementos">
+    <figure>
+        <!-- La imagen se cambia cn el js -->
+        <img src="~/Images/perfil-default.png" alt="Imagen de perfil" class="rounded-circle autor" id="usuarioImage"
+             style="cursor: pointer;">
+        <figcaption class="mt-2" id="captionText">Añade una foto tuya</figcaption>
+    </figure>
+    <input type="file" id="fileInput" onchange="onFileSelected(event)" />
+    <div class="contenido">
+        <!-- datos -->
+        <h2>Nombres:</h2>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Rosalino" aria-label="Username"
+                   aria-describedby="basic-addon1">
+        </div>
+        <h2>Apellidos:</h2>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Sánchez Félix" aria-label="Username"
+                   aria-describedby="basic-addon1">
+        </div>
+        <h2>Correo:</h2>
+        <div class="mb-3">
+            <input type="email" class="form-control" id="exampleFormControlInput1"
+                   placeholder="chalino@sanchez.com">
+        </div>
+        <h2>Contraseña:</h2>
+        <div class="input-group">
+            <input type="password" id="inputPassword5" class="form-control" placeholder="123abc"
+                   aria-describedby="passwordHelpBlock">
+            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                Mostrar
+            </button>
+        </div>
+        <h2>Edad:</h2>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Introduce tu edad" aria-label="Username"
+                   aria-describedby="basic-addon1">
+        </div>
+        <h2>Género:</h2>
+        <input type="radio" class="btn-check" name="options-base" id="option5" autocomplete="off" checked>
+        <label class="btn" for="option5">Hombre</label>
+        <input type="radio" class="btn-check" name="options-base" id="option6" autocomplete="off">
+        <label class="btn" for="option6">Mujer</label>
+    </div>
+</div>
+<div class="divBtn mt-4">
+    <button type="button" class="btn btn-lg btn-danger me-3" data-bs-toggle="modal" data-bs-target="#modalCancelar">Cancelar</button>
+    <a href="../index.html" type="button" class="btn btn-lg btn-dark">Hecho</a>
+</div>
+<!-- Modal Cancelar -->
+<div class="modal fade" id="modalCancelar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Cancelar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro que quieres salir sin guardar el avance?
+            </div>
+            <div class="modal-footer" id="footerCancelar">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <a href="../index.html" type="button" class="btn btn-danger">Salir</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -15,6 +15,7 @@
 <h1>Crear o editar libro</h1>
 <div class="elementos">
     <figure>
+        <!-- La imagen la cambia el js -->
         <img src="~/Images/libro-default.png" alt="Libro" class="libro" id="bookImage" style="cursor: pointer;">
         <figcaption class="mt-2" id="captionText">Añade la portada del libro</figcaption>
     </figure>
@@ -27,12 +28,14 @@
         <h2>Autor:</h2>
         <div class="input-group mb-3">
             <select class="form-select" id="autores">
+                <!-- Se debe de hacer una consulta a la BD para traer los autores y ponerlos aqui -->
                 <option selected>Selecciona un autor</option>
             </select>
         </div>
         <h2>Género:</h2>
         <div class="input-group mb-3">
             <select class="form-select" id="generos">
+                <!-- Igual con los generos, para el estatico se hace con js -->
                 <option selected>Selecciona un género</option>
             </select>
         </div>
@@ -53,5 +56,5 @@
     </div>
 </div>
 <div class="divBtn mt-4">
-    <a href="administrar-catalogo.html" type="button" class="btn btn-lg btn-dark">Hecho</a>
+    <a asp-controller="Administrar" asp-action="Catalogo" type="button" class="btn btn-lg btn-dark">Hecho</a>
 </div>

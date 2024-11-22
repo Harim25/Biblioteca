@@ -2,6 +2,7 @@
 var cardWidth = $(".carousel-item").width();
 var scrollPosition = 0;
 
+//botones
 $(document).ready(function () {
     function ajustarBotones() {
         const botones = document.querySelectorAll('.genero');
@@ -38,6 +39,7 @@ $(document).ready(function () {
 
 function actualizarContenido(generoId) {
     $("#contenidoGenero").empty();
+    //para el estatico, esta es la plantilla, es lo mismo pa todos
     switch (generoId) {
         case "1":
             for (let i = 0; i < 10; i++) {
@@ -195,6 +197,7 @@ function actualizarContenido(generoId) {
     }
 }
 
+//carrusel
 $(".carousel-control-next").on("click", function () {
     if (window.innerWidth >= 1570) {
         if (scrollPosition < (carouselWidth - cardWidth * 7)) {

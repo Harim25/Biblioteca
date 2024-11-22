@@ -4,12 +4,14 @@
         mostrarLibros()
     });
     for (let i = 0; i < 10; i++) {
+        //para el estatico, esta es la plantilla
         let autor = `
                 <li><a class="dropdown-item" href="#">Autor ${i}</a></li>
             `;
         $("#listaAutor").append(autor)
     }
     for (let i = 0; i < 10; i++) {
+        //para el estatico, esta es la plantilla
         let genero = `
                 <li><a class="dropdown-item" href="#">Género ${i}</a></li>
             `;
@@ -19,6 +21,7 @@
 })
 function mostrarLibros() {
     for (let i = 0; i < 50; i++) {
+        //para el estatico, esta es la plantilla
         let libro = `
                 <div class="card">
                     <a href="vista-libro.html" class="card-link">

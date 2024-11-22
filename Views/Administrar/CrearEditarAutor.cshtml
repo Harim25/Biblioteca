@@ -15,6 +15,7 @@
 <h1>Crear o editar autor</h1>
 <div class="elementos">
     <figure>
+        <!-- La imagen la cambia el js al subir una -->
         <img src="~/Images/perfil-default.png" alt="Autor" class="rounded-circle autor" id="autorImage" style="cursor: pointer;">
         <figcaption class="mt-2" id="captionText">Añade la foto del autor</figcaption>
     </figure>
@@ -27,5 +28,5 @@
     </div>
 </div>
 <div class="divBtn mt-4">
-    <a href="administrar-autores.html" type="button" class="btn btn-lg btn-dark">Hecho</a>
+    <a asp-controller="Administrar" asp-action="Autores" type="button" class="btn btn-lg btn-dark">Hecho</a>
 </div>

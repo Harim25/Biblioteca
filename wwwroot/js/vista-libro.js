@@ -9,3 +9,5 @@ estrella.onclick = function () {
         icono.classList.add("bi-star")
     }
 }
+
+//cambiar las clases a la estrellita

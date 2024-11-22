@@ -1,11 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     for (let i = 0; i < 10; i++) {
+        //para el estatico, esta es la plantilla
         let autor = `
                 <option value="${i + 1}">Chalino Sánchez</option>
             `;
         $("#autores").append(autor)
     }
     for (let i = 0; i < 10; i++) {
+        //para el estatico, esta es la plantilla
         let genero = `
                 <option value="${i + 1}">Misterio</option>
             `;
@@ -46,3 +48,5 @@ const onFileSelected = async (event) => {
         captionText.textContent = "Error al subir la imagen. Intente nuevamente.";
     }
 }
+
+//todo esto es para comunicarse con la api de bytescale

@@ -29,3 +29,5 @@ $(document).ready(function () {
         $("#folios").append(folio)
     }
 })
+
+//todo es para el estatico

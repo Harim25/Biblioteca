@@ -1,0 +1,53 @@
+﻿@{
+    //Cambiar el titulo del libro
+    ViewData["Title"] = "Libro El principito";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/vista-elementos.css" />
+}
+
+@section Scripts {
+    <script src="~/js/vista-libro.js"></script>
+}
+
+<div class="elementos">
+    <img src="~/images/libro-default.png" alt="Libro" class="libro">
+    <div class="contenido">
+        <h2>Titulo:</h2>
+        <p class="ms-4 mb-4 text-body-secondary">El principito</p><!-- Contenido -->
+        <h2>Autor:</h2>
+        <p class="ms-4 mb-4 text-body-secondary">Antoine de Saint-Exupéry</p><!-- Contenido -->
+        <h2>Género:</h2>
+        <p class="ms-4 mb-4 text-body-secondary">Literatura infantil</p><!-- Contenido -->
+        <h2>Editorial:</h2>
+        <p class="ms-4 mb-4 text-body-secondary">Principito inc.</p><!-- Contenido -->
+    </div>
+</div>
+<div class="mt-4">
+    <h2>Sinopsis:</h2>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, provident architecto. Itaque, reiciendis
+        odit quam quaerat ipsam mollitia at eligendi eveniet odio? Harum optio, dolorem quaerat quos nam nobis
+        reiciendis fuga. Excepturi quam nihil neque maiores assumenda, perspiciatis sunt deserunt dicta eaque
+        dolor maxime laudantium error, rerum consequatur inventore corrupti?<br><br>Lorem ipsum dolor sit, amet
+        consectetur adipisicing elit. Ducimus doloribus, neque iure maxime consequatur explicabo nobis magnam
+        possimus perspiciatis nulla nostrum expedita non dicta dolorum alias exercitationem quae adipisci
+        repellendus saepe libero? Quasi commodi dignissimos vero quidem pariatur perspiciatis sed possimus,
+        nihil, facere ducimus dolorum, totam non dolorem debitis nesciunt porro laboriosam atque alias deleniti
+        accusantium placeat. Tempora nesciunt architecto et quisquam sint ut neque, illo at nostrum laudantium
+        doloremque nihil nisi, repellendus pariatur eos expedita, excepturi molestiae placeat a! Enim eius hic
+        iure consectetur inventore nulla suscipit, nobis dolores minima nemo illum tempora voluptates ad quasi a
+        possimus est aperiam repellat ullam. Id totam unde molestiae vel molestias cupiditate, quae provident et
+        iusto eius ducimus itaque recusandae, quia ad beatae earum eos. Dolorem, repellat aliquid magni,
+        doloribus ipsum voluptatum cum asperiores atque nihil eius adipisci accusantium ducimus iste laborum
+        dolore quis quam. Numquam similique totam itaque molestiae. Ullam, delectus.
+    </p><!-- Contenido -->
+</div>
+<div class="divBtn mt-4">
+    <h6 class="mb-2"><!-- Contenido -->100 unidades disponibles</h6>
+    <!-- Manda al formulario -->
+    <button type="button" class="btn btn-lg btn-dark" onclick="window.location.href='formulario-libro.html'">Pedir Prestado</button>
+</div>
+<!-- Al pulsar la estrella se agrega a favoritos -->
+<button id="estrella"><i class="bi bi-star" id="icono"></i></button>
