@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Autor";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/vista-autor.css" />
+}
+
+@section Scripts {
+    <script src="~/js/vista-libro.js"></script>
+}
+
+    <div class="elementos">
+        <img src="../Imagenes/Prueba/Autores/Ana Frank.jpg" alt="autor" class="autor">
+        <div class="contenido">
+            <h2>Autor:</h2>
+            <p class="ms-4 mb-4 text-body-secondary">Ana Frank</p>
+        </div>
+    </div>
+    <div class="contenedor">
+        <h2 class="mb-3">Libros</h2>
+        <div class="tabla">
+            <div class="card">
+                <a href="../Pantallas/vista-libro.html" class="card-link">
+                    <img src="../Imagenes/Prueba/El diario de Ana Frank.png" class="card-img-top libro"
+                         alt="...">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">El diario de Ana Frank</h5>
+                </div>
+            </div>
+        </div>
+        <div class="divBtn mt-4">
+            <button id="estrella"><i class="bi bi-star" id="icono"></i></button>
+        </div>
+    </div>
+    

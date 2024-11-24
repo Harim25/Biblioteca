@@ -29,8 +29,35 @@ namespace Biblioteca.Controllers
         {
             return View();
         }
-
         public IActionResult Privacy()
+        {
+            return View();
+        }
+        public ActionResult Acerca()
+        {
+            return View();
+        }
+        public ActionResult Advertencia()
+        {
+            return View();
+        }
+        public ActionResult EncontrarLibro()
+        {
+            return View();
+        }
+        public ActionResult Folio()
+        {
+            return View();
+        }
+        public ActionResult FormularioLibro()
+        {
+            return View();
+        }
+        public ActionResult PedirLibro()
+        {
+            return View();
+        }
+        public ActionResult VistaAutor()
         {
             return View();
         }

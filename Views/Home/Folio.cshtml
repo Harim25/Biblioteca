@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Folio";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/explorar-genero.css" />
+}
+
+@section Scripts {
+    <script src="~/js/explorar-genero.js"></script>
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Información de Préstamo</h2>
+
+    <div class="alert alert-success text-center" role="alert">
+        <h4 class="alert-heading">¡Folio de Préstamo Generado!</h4>
+        <p>Este es tu folio de préstamo. Por favor, muéstralo en la recepción para recoger tu libro.</p>
+        <hr>
+        <h3 class="fw-bold">Folio: <span id="folioGenerado">AB12-34CD</span></h3>
+    </div>
+    <div class="mb-5">
+        <h5>Pasos a seguir:</h5>
+        <ol>
+            <li>Dirígete a la biblioteca en la fecha de recogida que has establecido.</li>
+            <li>Presenta el folio que se muestra arriba en la recepción.</li>
+            <li>Recoge tu libro y disfruta de la lectura.</li>
+        </ol>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-secondary" onclick="volverPaginaLibro()">Atrás</button>
+    </div>
+</div>

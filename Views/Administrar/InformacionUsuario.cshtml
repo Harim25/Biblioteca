@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "InformacionUsuario";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/vista-autor.css" />
+}
+
+@section Scripts {
+    <script src="~/js/vista-libro.js"></script>
+}
+
+<div class="elementos">
+    <img src="../Imagenes/perfil-default.png" alt="autor" class="autor">
+    <div class="contenido">
+        <h2>Nombre:</h2>
+        <p class="ms-4 mb-4 text-body-secondary">David Arthuro</p>
+        <h2>Apellidos:</h2>
+        <p class="ms-4 mb-4 text-body-secondary">Martinez Alaniz</p>
+        <h2>Correo:</h2>
+        <p class="ms-4 mb-4 text-body-secondary">Dvd_mrtnz@gmail.com</p>
+    </div>
+</div>
+<div class="contenedor">
+    <h2 class="mb-3">Libros en posesión:</h2>
+    <div class="tabla">
+        <div class="card">
+            <a href="../Pantallas/detalles-prestamo.html" class="card-link">
+                <img src="../Imagenes/Prueba/El diario de Ana Frank.png" class="card-img-top libro"
+                     alt="...">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">Libro 1 codigo: abc 123</h5>
+            </div>
+        </div>
+    </div>
+</div>

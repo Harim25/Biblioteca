@@ -10,6 +10,14 @@ namespace Biblioteca.Controllers
         {
             return View();
         }
+        public ActionResult CanjearCodigo()
+        {
+            return View();
+        }
+        public ActionResult DetallesPrestamo()
+        {
+            return View();
+        }
 
         // GET: Canjear_codigoController/Details/5
         public ActionResult Details(int id)

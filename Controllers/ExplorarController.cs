@@ -10,6 +10,18 @@ namespace Biblioteca.Controllers
         {
             return View();
         }
+        public ActionResult ExplorarAutores()
+        {
+            return View();
+        }
+        public ActionResult ExplorarGeneros()
+        {
+            return View();
+        }
+        public ActionResult ExplorarUnGenero()
+        {
+            return View();
+        }
 
         // GET: ExplorarController/Details/5
         public ActionResult Details(int id)

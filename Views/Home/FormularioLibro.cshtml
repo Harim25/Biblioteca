@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "FormularioParaPedirLibro";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/formulario-prestamo.css" />
+}
+
+<div class="container mt-5">
+    <a href="pagina_del_libro.html" class="btn btn-link text-decoration-none">&lt; Atrás</a>
+    <h2 class="text-center my-4">Rellena el siguiente formulario</h2>
+
+    <form class="formulario-prestamo">
+        <div class="mb-3">
+            <label for="fecha-desde" class="form-label">Fecha desde:</label>
+            <input type="date" id="fecha-desde" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="fecha-hasta" class="form-label">Fecha hasta:</label>
+            <input type="date" id="fecha-hasta" class="form-control" required>
+        </div>
+        <div class="d-flex justify-content-between mt-4">
+            <button type="button" class="btn btn-danger" onclick="confirmarCancelacion()">Cancelar</button>
+            <button type="button" class="btn btn-success" onclick="submitFormulario()">Hecho</button>
+        </div>
+    </form>
+</div>

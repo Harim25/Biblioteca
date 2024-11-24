@@ -42,6 +42,10 @@ namespace Biblioteca.Controllers
         {
             return View();
         }
+        public ActionResult InformacionUsuario()
+        {
+            return View();
+        }
 
         //De aqui pa abajo ya no le sé. xd - Uziel
         // GET: AdministrarController/Details/5

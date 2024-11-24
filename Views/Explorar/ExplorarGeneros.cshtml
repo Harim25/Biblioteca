@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "ExplorarGeneros";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/explorar-genero.css" />
+}
+
+@section Scripts {
+    <script src="~/js/explorar-genero.js"></script>
+}
+
+<div id="principal">
+    <div class="container">
+        <h1>Explorar por género</h1>
+        <div id="generosContainer" class="generos-container">
+            <!-- Los géneros se cargarán aquí dinámicamente -->
+        </div>
+        <button id="mostrarMasBtn" class="btnexpo" onclick="mostrarMas()">Mostrar más</button>
+    </div>
+</div>
