@@ -126,7 +126,7 @@ namespace Biblioteca.Migrations
                     apellidos = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
                     edad = table.Column<int>(type: "int", nullable: false),
                     generoId = table.Column<int>(type: "int", nullable: false),
-                    imagen = table.Column<string>(type: "varchar(120)", unicode: false, maxLength: 120, nullable: false),
+                    imagen = table.Column<string>(type: "nvarchar(120)", maxLength: 120, nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

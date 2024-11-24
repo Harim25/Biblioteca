@@ -10,6 +10,9 @@ using Biblioteca.Models.dbModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using SQLitePCL;
 
 namespace Biblioteca.Areas.Identity.Pages.Account.Manage
 {
@@ -17,19 +20,18 @@ namespace Biblioteca.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<AplicationUser> _userManager;
         private readonly SignInManager<AplicationUser> _signInManager;
+        private readonly BibliotecaContext _context;
 
         public IndexModel(
             UserManager<AplicationUser> userManager,
-            SignInManager<AplicationUser> signInManager)
+            SignInManager<AplicationUser> signInManager,
+            BibliotecaContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public string Username { get; set; }
 
         /// <summary>
@@ -39,6 +41,7 @@ namespace Biblioteca.Areas.Identity.Pages.Account.Manage
         [TempData]
         public string StatusMessage { get; set; }
 
+        public List<SelectListItem> GenerosDisponibles { get; set; }
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -57,8 +60,29 @@ namespace Biblioteca.Areas.Identity.Pages.Account.Manage
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "Numero de Telefono")]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "Foto de Perfil")]
+            public string Imagen { get; set; }
+
+            [Display(Name = "Nombre")]
+            public string Username { get; set; }
+
+            [Display(Name = "Apellidos")]
+            public string Apellidos { get; set; }
+
+            [Display(Name = "Edad")]
+            public int Edad { get; set; }
+
+            [Display(Name = "Genero")]
+            public int GeneroId { get; set; }
+
+            [Display(Name = "Genero")]
+            public string Genero { get; set; }
+
+            [Display(Name = "Email")]
+            public string Email { get; set; }
         }
 
         private async Task LoadAsync(AplicationUser user)
@@ -66,11 +90,34 @@ namespace Biblioteca.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
+            // Cargar el género desde el contexto si es necesario
+            var genero = await _context.GeneroUsuarios.FirstOrDefaultAsync(g => g.Id == user.GeneroId);
+
             Username = userName;
+            // Asigna los valores adicionales del usuario
+            var apellidos = user.Apellidos;
+            var edad = user.Edad;
+            var generoId = user.GeneroId;
+            var email = user.Email;
+
+            // Cargar la lista de géneros
+            GenerosDisponibles = await _context.GeneroUsuarios
+                .Select(g => new SelectListItem
+                {
+                    Value = g.Id.ToString(), // Id del género
+                    Text = g.Genero // Descripción del género
+                })
+                .ToListAsync();
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                Apellidos = user.Apellidos,
+                Edad = user.Edad,
+                GeneroId = user.GeneroId,
+                Genero = genero?.Genero, // Descripción del género
+                Email = user.Email,
+                Username = userName
             };
         }
 
@@ -106,13 +153,28 @@ namespace Biblioteca.Areas.Identity.Pages.Account.Manage
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
+                    StatusMessage = "Error inesperado al actualizar el número de teléfono.";
                     return RedirectToPage();
                 }
             }
 
+            user.UserName = Input.Username;
+            user.Apellidos = Input.Apellidos;
+            user.Edad = Input.Edad;
+            user.Email = Input.Email;
+            user.GeneroId = Input.GeneroId;
+            user.Imagen = Input.Imagen;
+
+            // Guardar cambios en el usuario
+            var updateResult = await _userManager.UpdateAsync(user);
+            if (!updateResult.Succeeded)
+            {
+                StatusMessage = "Error inesperado al actualizar el perfil.";
+                return RedirectToPage();
+            }
+
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Tu perfil ha sido actualizado.";
             return RedirectToPage();
         }
     }

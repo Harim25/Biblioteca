@@ -13,7 +13,27 @@
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                <input asp-for="Input.UserName" class="form-control" autocomplete="NombreUsuario" aria-required="true" placeholder="Nombre(s)" />
+                <label asp-for="Input.UserName">Nombre(s)</label>
+                <span asp-validation-for="Input.UserName" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Apellidos" class="form-control" autocomplete="ApellidoUsuario" aria-required="true" placeholder="Apellidos" />
+                <label asp-for="Input.Apellidos">Apellidos</label>
+                <span asp-validation-for="Input.Apellidos" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Edad" class="form-control" autocomplete="EdadUsuario" aria-required="true" placeholder="Edad" />
+                <label asp-for="Input.Edad">Edad</label>
+                <span asp-validation-for="Input.Edad" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Genero" class="form-control" autocomplete="1" aria-required="true" placeholder="Genero" />
+                <label asp-for="Input.Genero">Genero</label>
+                <span asp-validation-for="Input.Genero" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Email" class="form-control" autocomplete="name@example.com" aria-required="true" placeholder="name@example.com" />
                 <label asp-for="Input.Email">Email</label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>

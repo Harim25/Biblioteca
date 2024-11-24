@@ -20,8 +20,7 @@ namespace Biblioteca.Models.dbModels
 
         [Column("imagen")]
         [StringLength(120)]
-        [Unicode(false)]
-        public string Imagen { get; set; } = null!;
+        public string? Imagen { get; set; }
 
         [InverseProperty("Usuario")]
         public virtual ICollection<AutorFavorito> AutorFavoritos { get; set; } = new List<AutorFavorito>();

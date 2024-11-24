@@ -1,30 +1,82 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "Perfil";
     ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/vista-elementos.css" />
+    <link rel="stylesheet" href="~/css/crear-editar-cuenta.css" />
+}
+
+@section Scripts {
+    <!-- Bytescale -->
+    <script src="https://js.bytescale.com/sdk/v3"></script>
+    <script src="~/js/crear-editar-cuenta.js"></script>
+    <partial name="_ValidationScriptsPartial" />
 }
 
 <h3>@ViewData["Title"]</h3>
 <partial name="_StatusMessage" for="StatusMessage" />
 <div class="row">
-    <div class="col-md-6">
-        <form id="profile-form" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Username" class="form-control" placeholder="Please choose your username." disabled />
-                <label asp-for="Username" class="form-label"></label>
+        <!-- datos -->
+        <div class="col-md-6">
+            <form id="profile-form" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Username" class="form-control" placeholder="Escribe tu Nombre"/>
+                    <label asp-for="Input.Username" class="form-label"></label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Apellidos" class="form-control" placeholder="Escribe tus Apellidos"/>
+                <label asp-for="Input.Apellidos" class="form-label"></label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" placeholder="Escribe tu Correo"/>
+                <label asp-for="Input.Email" class="form-label"></label>
+                </div>
+                <div class="form-floating mb-3">
+                <input asp-for="Input.Edad" class="form-control" placeholder="Escribe tu Edad" />
+                <label asp-for="Input.Edad" class="form-label"></label>
+                </div>
+                <div class="form-floating mb-3">
+                <select asp-for="Input.GeneroId" class="form-control" asp-items="Model.GenerosDisponibles">
+                    <option value="">Selecciona un género</option>
+                </select>
+                <label asp-for="Input.Genero" class="form-label">Género</label>
+                
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Escribe tu Numero de Telefono" />
+                    <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Imagen" class="form-control" placeholder="Escribe la url de la imagen" />
+                    <label asp-for="Input.Imagen" class="form-label"></label>
+                    <span asp-validation-for="Input.Imagen" class="text-danger"></span>
+                </div>
+                <button id="update-profile-button" type="submit" class="btn btn-lg btn-dark">Guardar</button>
+                <button id="salir-button" type="button" class="btn btn-lg btn-danger me-3" data-bs-toggle="modal" data-bs-target="#modalCancelar">Cancelar</button>
+            </form>
+        </div>
+    <!-- Modal Cancelar -->
+    <div class="modal fade" id="modalCancelar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Cancelar</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro que quieres salir sin guardar el avance?
+                </div>
+                <div class="modal-footer" id="footerCancelar">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <a type="button" class="btn btn-danger" asp-controller="Home" asp-action="Index">Salir</a>
+                </div>
             </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number."/>
-                <label asp-for="Input.PhoneNumber" class="form-label"></label>
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-            </div>
-            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
-        </form>
+        </div>
     </div>
 </div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

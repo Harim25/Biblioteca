@@ -68,6 +68,25 @@ namespace Biblioteca.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+            [Required]
+            [StringLength(256, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
+            [Display(Name ="Nombre(s)")]
+            public string UserName { get; set; }
+
+            [Required]
+            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
+            [Display(Name = "Apellidos)")]
+            public string Apellidos { get; set; }
+
+            [Required]
+            [Display(Name = "Edad")]
+            public int Edad {  get; set; }
+
+            [Required]
+            [Display(Name = "Genero")]
+            public int Genero { get; set; }
+
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -112,7 +131,10 @@ namespace Biblioteca.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                user.Apellidos = Input.Apellidos;
+                user.Edad = Input.Edad;
+                user.GeneroId = Input.Genero; 
+                await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 

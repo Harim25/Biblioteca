@@ -81,9 +81,9 @@
                                 <i class="bi bi-three-dots"></i> Más acciones
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-controller="Home" asp-action="acerca">Acerca de la biblioteca</a></li>
-                                <li><a class="dropdown-item" asp-controller="Home" asp-action="encontrar-libro">¿Cómo encontrar un libro?</a></li>
-                                <li><a class="dropdown-item" asp-controller="Home" asp-action="">¿Cómo pedir un libro?</a></li>
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="Acerca">Acerca de la biblioteca</a></li>
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="EncontrarLibro">¿Cómo encontrar un libro?</a></li>
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="PedirLibro">¿Cómo pedir un libro?</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -94,10 +94,7 @@
                 </form>
             </div>
             <div class="position-absolute top-0 end-0">
-                <!-- Se supone que si la inicion está iniciada, lleve a la pantalla creareditarcuenta y se agreguen solos los datos y si no, que lleve a iniciar sesion -->
-                <a asp-controller="Home" asp-action="">
-                    <img src="~/images/perfil-default.png" alt="Perfil" class="profile-img rounded-circle me-2 mt-2">
-                </a>
+                <partial name="_LoginPartial" />
             </div>
         </div>
     </nav>

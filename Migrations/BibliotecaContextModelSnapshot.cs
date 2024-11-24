@@ -17,7 +17,7 @@ namespace Biblioteca.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.10")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -60,10 +60,8 @@ namespace Biblioteca.Migrations
                         .HasColumnName("generoId");
 
                     b.Property<string>("Imagen")
-                        .IsRequired()
                         .HasMaxLength(120)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(120)")
+                        .HasColumnType("nvarchar(120)")
                         .HasColumnName("imagen");
 
                     b.Property<bool>("LockoutEnabled")

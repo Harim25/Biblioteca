@@ -13,23 +13,23 @@ namespace Biblioteca.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }
-        public IActionResult AccesoDenegado()
+        public ActionResult AccesoDenegado()
         {
             return View();
         }
-        public IActionResult ResultadoBusqueda()
+        public ActionResult ResultadoBusqueda()
         {
             return View();
         }
-        public IActionResult VistaLibro()
+        public ActionResult VistaLibro()
         {
             return View();
         }
-        public IActionResult Privacy()
+        public ActionResult Privacy()
         {
             return View();
         }
