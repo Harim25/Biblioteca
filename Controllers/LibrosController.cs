@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Biblioteca.Models.dbModels;
 using Biblioteca.Models;
 using Microsoft.AspNetCore.Authorization;
+using Biblioteca.Models.DTO;
+using Biblioteca.Models.ViewModels;
 
 namespace Biblioteca.Controllers
 {
@@ -51,11 +53,13 @@ namespace Biblioteca.Controllers
         // GET: Libros/Create
         public IActionResult Create()
         {
-            ViewData["AutorId"] = new SelectList(_context.Autors, "Id", "Id");
-            ViewData["AutorNombre"] = new SelectList(_context.Autors, "Id", "Nombre");
-            ViewData["GeneroId"] = new SelectList(_context.GeneroLibros, "Id", "Id");
-            ViewData["GeneroNombre"] = new SelectList(_context.GeneroLibros, "Id", "Nombre");
-            return View();
+            LibroViewModel model = new LibroViewModel
+            {
+                LibroCreate = new LibroCreateDTO(),
+                SelectListsAutores = new SelectList(_context.Autors, "Id", "Nombre"),
+                SelectListsGeneros = new SelectList(_context.GeneroLibros, "Id", "Nombre")
+            };
+            return View(model);
         }
 
         // POST: Libros/Create
@@ -63,28 +67,34 @@ namespace Biblioteca.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Titulo,AutorId,GeneroId,Editorial,Sinopsis,Cantidad,FechaCreacion,Imagen")] LibroHR libro)
+        public async Task<IActionResult> Create(LibroCreateDTO libroCreate)
         {
             if (ModelState.IsValid)
             {
-                Libro libro1 = new Libro()
+                Libro libro = new Libro
                 {
-                    Titulo = libro.Titulo,
-                    AutorId = libro.AutorId,
-                    GeneroId = libro.GeneroId,
-                    Editorial = libro.Editorial,
-                    Sinopsis = libro.Sinopsis,
-                    Cantidad = libro.Cantidad,
-                    FechaCreacion = libro.FechaCreacion,
-                    Imagen = libro.Imagen,
+                    Titulo = libroCreate.Titulo,
+                    AutorId = libroCreate.AutorId,
+                    GeneroId = libroCreate.GeneroId,
+                    Editorial = libroCreate.Editorial,
+                    Sinopsis = libroCreate.Sinopsis,
+                    Cantidad = libroCreate.Cantidad,
+                    FechaCreacion = libroCreate.FechaCreacion,
+                    Imagen = libroCreate.Imagen,
                 };
-                _context.Libros.Add(libro1);
+                _context.Libros.Add(libro);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AutorId"] = new SelectList(_context.Autors, "Id", "Id", libro.AutorId);
-            ViewData["GeneroId"] = new SelectList(_context.GeneroLibros, "Id", "Id", libro.GeneroId);
-            return View(libro);
+            LibroViewModel model = new()
+            {
+                LibroCreate = libroCreate,
+                SelectListsAutores = new SelectList(_context.Autors, "Id", "Nombre"),
+                SelectListsGeneros = new SelectList(_context.GeneroLibros, "Id", "Nombre")
+            };
+            ViewData["AutorId"] = new SelectList(_context.Autors, "Id", "Id", libroCreate.AutorId);
+            ViewData["GeneroId"] = new SelectList(_context.GeneroLibros, "Id", "Id", libroCreate.GeneroId);
+            return View(model);
         }
 
         // GET: Libros/Edit/5
@@ -100,9 +110,13 @@ namespace Biblioteca.Controllers
             {
                 return NotFound();
             }
-            ViewData["AutorId"] = new SelectList(_context.Autors, "Id", "Id", libro.AutorId);
-            ViewData["GeneroId"] = new SelectList(_context.GeneroLibros, "Id", "Id", libro.GeneroId);
-            return View(libro);
+            LibroViewModel model = new LibroViewModel
+            {
+                LibroUpdate = new LibroUpdateDTO(),
+                SelectListsAutores = new SelectList(_context.Autors, "Id", "Nombre", libro.AutorId),
+                SelectListsGeneros = new SelectList(_context.GeneroLibros, "Id", "Nombre", libro.GeneroId)
+            };
+            return View(model);
         }
 
         // POST: Libros/Edit/5
@@ -110,9 +124,9 @@ namespace Biblioteca.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,AutorId,GeneroId,Editorial,Sinopsis,Cantidad,FechaCreacion,Imagen")] LibroHR libro)
+        public async Task<IActionResult> Edit(int id, LibroUpdateDTO libroUpdate)
         {
-            if (id != libro.Id)
+            if (id != libroUpdate.Id)
             {
                 return NotFound();
             }
@@ -123,21 +137,21 @@ namespace Biblioteca.Controllers
                 {
                     Libro libro1 = new Libro()
                     {
-                        Titulo = libro.Titulo,
-                        AutorId = libro.AutorId,
-                        GeneroId = libro.GeneroId,
-                        Editorial = libro.Editorial,
-                        Sinopsis = libro.Sinopsis,
-                        Cantidad = libro.Cantidad,
-                        FechaCreacion = libro.FechaCreacion,
-                        Imagen = libro.Imagen,
+                        Titulo = libroUpdate.Titulo,
+                        AutorId = libroUpdate.AutorId,
+                        GeneroId = libroUpdate.GeneroId,
+                        Editorial = libroUpdate.Editorial,
+                        Sinopsis = libroUpdate.Sinopsis,
+                        Cantidad = libroUpdate.Cantidad,
+                        FechaCreacion = libroUpdate.FechaCreacion,
+                        Imagen = libroUpdate.Imagen,
                     };
                     _context.Update(libro1);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!LibroExists(libro.Id))
+                    if (!LibroExists(libroUpdate.Id))
                     {
                         return NotFound();
                     }
@@ -148,9 +162,13 @@ namespace Biblioteca.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AutorId"] = new SelectList(_context.Autors, "Id", "Id", libro.AutorId);
-            ViewData["GeneroId"] = new SelectList(_context.GeneroLibros, "Id", "Id", libro.GeneroId);
-            return View(libro);
+            LibroViewModel model = new LibroViewModel
+            {
+                LibroUpdate = libroUpdate,
+                SelectListsAutores = new SelectList(_context.Autors, "Id", "Nombre", libroUpdate.AutorId),
+                SelectListsGeneros = new SelectList(_context.GeneroLibros, "Id", "Nombre", libroUpdate.GeneroId)
+            };
+            return View(libroUpdate);
         }
 
         // GET: Libros/Delete/5
