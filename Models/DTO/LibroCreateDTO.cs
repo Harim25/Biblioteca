@@ -7,9 +7,6 @@ namespace Biblioteca.Models.DTO
 {
     public class LibroCreateDTO
     {
-        [Column("id")]
-        public int Id { get; set; }
-
         [Column("titulo")]
         [StringLength(50)]
         [Unicode(false)]

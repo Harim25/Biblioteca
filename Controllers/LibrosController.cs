@@ -112,7 +112,18 @@ namespace Biblioteca.Controllers
             }
             LibroViewModel model = new LibroViewModel
             {
-                LibroUpdate = new LibroUpdateDTO(),
+                LibroUpdate = new LibroUpdateDTO
+                {
+                    Id = libro.Id,
+                    Titulo = libro.Titulo,
+                    AutorId = libro.AutorId,
+                    GeneroId = libro.GeneroId,
+                    Editorial = libro.Editorial,
+                    Sinopsis = libro.Sinopsis,
+                    Cantidad = libro.Cantidad,
+                    FechaCreacion = libro.FechaCreacion,
+                    Imagen = libro.Imagen,
+                },
                 SelectListsAutores = new SelectList(_context.Autors, "Id", "Nombre", libro.AutorId),
                 SelectListsGeneros = new SelectList(_context.GeneroLibros, "Id", "Nombre", libro.GeneroId)
             };
@@ -135,18 +146,23 @@ namespace Biblioteca.Controllers
             {
                 try
                 {
-                    Libro libro1 = new Libro()
+                    var libro = await _context.Libros.FindAsync(id);
+                    if (libro == null)
                     {
-                        Titulo = libroUpdate.Titulo,
-                        AutorId = libroUpdate.AutorId,
-                        GeneroId = libroUpdate.GeneroId,
-                        Editorial = libroUpdate.Editorial,
-                        Sinopsis = libroUpdate.Sinopsis,
-                        Cantidad = libroUpdate.Cantidad,
-                        FechaCreacion = libroUpdate.FechaCreacion,
-                        Imagen = libroUpdate.Imagen,
-                    };
-                    _context.Update(libro1);
+                        return NotFound();
+                    }
+
+                    // Actualiza las propiedades necesarias
+                    libro.Titulo = libroUpdate.Titulo;
+                    libro.AutorId = libroUpdate.AutorId;
+                    libro.GeneroId = libroUpdate.GeneroId;
+                    libro.Editorial = libroUpdate.Editorial;
+                    libro.Sinopsis = libroUpdate.Sinopsis;
+                    libro.Cantidad = libroUpdate.Cantidad;
+                    libro.FechaCreacion = libroUpdate.FechaCreacion;
+                    libro.Imagen = libroUpdate.Imagen;
+
+                    _context.Update(libro);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

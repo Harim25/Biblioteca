@@ -5,9 +5,9 @@ namespace Biblioteca.Models.ViewModels
 {
     public class LibroViewModel
     {
-        public LibroCreateDTO? LibroCreate { get; set; }
+        public LibroCreateDTO ? LibroCreate { get; set; }
 
-        public LibroUpdateDTO? LibroUpdate { get; set; }
+        public LibroUpdateDTO ? LibroUpdate { get; set; }
 
         public SelectList SelectListsAutores { get; set; } = null!;
 
