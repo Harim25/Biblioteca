@@ -99,6 +99,7 @@ namespace Biblioteca.Areas.Identity.Pages.Account.Manage
             var edad = user.Edad;
             var generoId = user.GeneroId;
             var email = user.Email;
+            var imagen = user.Imagen;
 
             // Cargar la lista de géneros
             GenerosDisponibles = await _context.GeneroUsuarios
@@ -117,7 +118,8 @@ namespace Biblioteca.Areas.Identity.Pages.Account.Manage
                 GeneroId = user.GeneroId,
                 Genero = genero?.Genero, // Descripción del género
                 Email = user.Email,
-                Username = userName
+                Username = userName,
+                Imagen = user.Imagen
             };
         }
 
@@ -128,6 +130,11 @@ namespace Biblioteca.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+
+            Input = new InputModel
+            {
+                Imagen = user.Imagen
+            };
 
             await LoadAsync(user);
             return Page();

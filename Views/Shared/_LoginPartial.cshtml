@@ -5,9 +5,20 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
+    // Obtener el usuario autenticado
+    var usuario = await UserManager.GetUserAsync(User);
+    var imagen = usuario?.Imagen;
+
     <li class="nav-item">
             <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                <img src="~/images/perfil-default.png" alt="Perfil" class="profile-img rounded-circle me-2 mt-2">
+                @if (!string.IsNullOrEmpty(imagen))
+                {
+                    <img src="@imagen" alt="Perfil" class="profile-img rounded-circle me-2 mt-2">
+                }
+                else
+                {
+                    <img src="~/images/perfil-default.png" alt="Perfil por defecto" class="profile-img rounded-circle me-2 mt-2">
+                }
                 Hola @User.Identity?.Name!
             </a>
             
