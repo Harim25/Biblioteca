@@ -4,7 +4,11 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+@section Styles {
+    <link rel="stylesheet" href="~/css/administrar-elementos.css" />
+}
+
+<h1>Detalles</h1>
 
 <div>
     <h4>Autor</h4>
@@ -20,11 +24,11 @@
             @Html.DisplayNameFor(model => model.Imagen)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Imagen)
+            <img class="rounded-circle autor" src="@Html.DisplayFor(model => model.Imagen)" alt="" />
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-dark">Editar</a> |
+    | <a asp-action="Index" class="btn btn-dark">Volver</a>
 </div>

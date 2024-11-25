@@ -1,15 +1,30 @@
 ﻿@model IEnumerable<Biblioteca.Models.dbModels.Autor>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Administrar autores";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+@section Styles {
+    <link rel="stylesheet" href="~/css/administrar-elementos.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+}
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="~/js/administrar-autores.js"></script>
+}
+<div>
+    <h1>Administrar Autores</h1>
+    <div id="divBtn">
+        <a asp-action="Create" type="button" class="btnexpo btn btn-dark" id="btnAdd">
+            Crear elemento <i class="bi bi-plus"></i>
+        </a>
+    </div>
+</div>
+<br />
+<br />
+<div>
+<table id="TAutores" class="table">
     <thead>
         <tr>
             <th>
@@ -28,14 +43,15 @@
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Imagen)
+                <img class="rounded-circle autor" src="@Html.DisplayFor(modelItem => item.Imagen)" alt="" />
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" type="button" class="btn btn-dark"><i class="bi bi-pencil"></i>Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id" type="button" class="btn btn-dark"><i class="bi bi-info-circle"></i>Info</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" type="button" class="btn btn-dark eliminar-btn"><i class="bi bi-trash me-1"></i>Eliminar</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>
