@@ -1,18 +1,17 @@
 ﻿@model Biblioteca.Models.dbModels.Libro
 
 @{
-    ViewData["Title"] = "Eliminar";
+    ViewData["Title"] = "Detalles de Nuestros Libros";
 }
 
 @section Styles {
     <link rel="stylesheet" href="~/css/administrar-elementos.css" />
 }
 
-<h1>Eliminar</h1>
+<h1>Detalles</h1>
 
-<h3>¿Estas seguro de querer eliminar este libro?</h3>
 <div>
-    <h4>Libro</h4>
+    <h4>Nuestros Libro</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -64,10 +63,7 @@
             @Html.DisplayFor(model => model.Genero.Nombre)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Eliminar" class="btn btn-danger me-3" /> |
-        <a asp-action="Index" class="btn btn-dark">Volver</a>
-    </form>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-dark">Volver</a>
 </div>

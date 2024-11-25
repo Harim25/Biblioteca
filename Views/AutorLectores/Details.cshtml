@@ -1,7 +1,7 @@
 ﻿@model Biblioteca.Models.dbModels.Autor
 
 @{
-    ViewData["Title"] = "Detalles";
+    ViewData["Title"] = "Detalles de Nuestros Autores";
 }
 
 @section Styles {
@@ -11,7 +11,7 @@
 <h1>Detalles</h1>
 
 <div>
-    <h4>Autor</h4>
+    <h4>Nuestro Autor</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -29,6 +29,5 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-dark">Editar</a> |
-    | <a asp-action="Index" class="btn btn-dark">Volver</a>
+    <a asp-action="Index" class="btn btn-dark">Volver</a>
 </div>

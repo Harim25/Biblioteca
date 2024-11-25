@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Biblioteca.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdministrarController : Controller
     {
         // GET: AdministrarController
@@ -10,43 +12,7 @@ namespace Biblioteca.Controllers
         {
             return View();
         }
-        public ActionResult Autores()
-        {
-            return View();
-        }
-        public ActionResult Catalogo()
-        {
-            return View();
-        }
-        public ActionResult Generos()
-        {
-            return View();
-        }
-        public ActionResult LibrosPrestados()
-        {
-            return View();
-        }
-        public ActionResult Usuarios()
-        {
-            return View();
-        }
-        public ActionResult CrearEditarAutor()
-        {
-            return View();
-        }
-        public ActionResult CrearEditarGenero()
-        {
-            return View();
-        }
-        public ActionResult CrearEditarLibro()
-        {
-            return View();
-        }
-        public ActionResult InformacionUsuario()
-        {
-            return View();
-        }
-
+        
         //De aqui pa abajo ya no le sé. xd - Uziel
         // GET: AdministrarController/Details/5
         public ActionResult Details(int id)

@@ -83,7 +83,7 @@ namespace Biblioteca.Controllers
             {
                 return NotFound();
             }
-            ViewData["GeneroId"] = new SelectList(_context.GeneroUsuarios, "Id", "Id", aplicationUser.GeneroId);
+            ViewData["GeneroId"] = new SelectList(_context.GeneroUsuarios, "Id", "Genero", aplicationUser.GeneroId);
             return View(aplicationUser);
         }
 

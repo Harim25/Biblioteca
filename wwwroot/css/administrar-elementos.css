@@ -2,9 +2,13 @@
     height: 50px;
 }
 
+.foto {
+    height: 450px;
+}
+
 .libro {
     border-radius: 3px;
-    height:200px;
+    height: 200px;
 }
 
 .btn-dark {
