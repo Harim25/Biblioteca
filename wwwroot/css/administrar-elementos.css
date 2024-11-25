@@ -1,9 +1,10 @@
-.libro, .autor, .usuario {
+.autor, .usuario {
     height: 50px;
 }
 
 .libro {
     border-radius: 3px;
+    height:200px;
 }
 
 .btn-dark {
