@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Biblioteca.Models.dbModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Biblioteca.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class AutorsController : Controller
     {
         private readonly BibliotecaContext _context;
