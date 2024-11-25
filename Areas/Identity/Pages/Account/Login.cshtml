@@ -5,6 +5,10 @@
     ViewData["Title"] = "Log in";
 }
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/crear-editar-cuenta.css" />
+}
+
 <h1>@ViewData["Title"]</h1>
 <div class="row">
     <div class="col-md-4">
@@ -29,17 +33,17 @@
                     </label>
                 </div>
                 <div>
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                    <button id="login-submit" type="submit" class="w-100 btns btn btn-lg btn-dark">Log in</button>
                 </div>
+                <br />
+                <br />
                 <div>
                     <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                        <a type="button" class="btn btns btn-warning" id="forgot-password" asp-page="./ForgotPassword">Olvide mi Contraseña</a>
                     </p>
+                    <br />
                     <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                    <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                        <a type="button" class="btn btns btn-warning" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registrase como Nuevo Usuario</a>
                     </p>
                 </div>
             </form>

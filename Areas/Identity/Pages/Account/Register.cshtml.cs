@@ -19,6 +19,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Biblioteca.Areas.Identity.Pages.Account
 {
@@ -29,18 +31,21 @@ namespace Biblioteca.Areas.Identity.Pages.Account
         private readonly IUserStore<AplicationUser> _userStore;
         private readonly IUserEmailStore<AplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
+        private readonly BibliotecaContext _context;
 
         public RegisterModel(
             UserManager<AplicationUser> userManager,
             IUserStore<AplicationUser> userStore,
             SignInManager<AplicationUser> signInManager,
-            ILogger<RegisterModel> logger)
+            ILogger<RegisterModel> logger,
+            BibliotecaContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         /// <summary>
@@ -56,6 +61,7 @@ namespace Biblioteca.Areas.Identity.Pages.Account
         /// </summary>
         public string ReturnUrl { get; set; }
 
+        public List<SelectListItem> GenerosDisponibles { get; set; }
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -82,9 +88,14 @@ namespace Biblioteca.Areas.Identity.Pages.Account
             [Display(Name = "Edad")]
             public int Edad {  get; set; }
 
-            [Required]
             [Display(Name = "Genero")]
-            public int Genero { get; set; }
+            public int GeneroId { get; set; }
+
+            [Display(Name = "Genero")]
+            public string Genero { get; set; }
+
+            [Display(Name ="Foto de Perfil")]
+            public string Imagen { get; set; }
 
 
             /// <summary>
@@ -116,11 +127,22 @@ namespace Biblioteca.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
         }
 
-
-        public async Task OnGetAsync(string returnUrl = null)
+            public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            // Cargar géneros
+            GenerosDisponibles = await _context.GeneroUsuarios
+                .Select(g => new SelectListItem
+                {
+                    Value = g.Id.ToString(), // Id del género
+                    Text = g.Genero // Descripción del género
+                })
+                .ToListAsync();
+
+            // Agregar opción predeterminada
+            GenerosDisponibles.Insert(0, new SelectListItem { Value = "", Text = "Seleccione un género", Selected = true });
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -133,7 +155,8 @@ namespace Biblioteca.Areas.Identity.Pages.Account
 
                 user.Apellidos = Input.Apellidos;
                 user.Edad = Input.Edad;
-                user.GeneroId = Input.Genero; 
+                user.GeneroId = Input.GeneroId;
+                user.Imagen = Input.Imagen;
                 await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);

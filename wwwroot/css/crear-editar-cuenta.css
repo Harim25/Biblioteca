@@ -18,3 +18,8 @@ nav .d-flex {
 footer {
     margin-left: 0%;
 }
+
+.btns {
+    color: black;
+    background-color: #ece7aa;
+}
