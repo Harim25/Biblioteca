@@ -1,4 +1,4 @@
-﻿{
+﻿@{
     ViewData["Title"] = "CanjearCodigo";
 }
 
@@ -13,6 +13,6 @@
             <label for="codigoInput" class="form-label">Ingrese el código</label>
             <input type="text" class="form-control mx-auto" id="codigoInput" style="max-width: 300px;" placeholder="Código">
         </div>
-        <button type="button" class="btn btn-primary" onclick="window.location.href='detalles-prestamo.html'">Hecho</button>
+        <a asp-controller="CanjearCodigo" asp-action="DetallesPrestamo"  type="button" class="btn btn-primary">Hecho</a>
     </form>
 </div>
