@@ -3,8 +3,8 @@ $(document).ready(function () {
         //para el estatico, esta es la plantilla
         let libro = `
                 <div class="card">
-                    <a href="vista-libro.html" class="card-link">
-                        <img src="../Imagenes/Prueba/Los ojos de mona.png" class="card-img-top libro" alt="...">
+                    <a asp-controller="LibroLector" asp-action="Details" asp-route-id="@item.Id" type="button" class="card-link">
+                        <img class="card-img-top libro" src="@Html.DisplayFor(modelItem => item.Imagen)" alt="" />
                     </a>
                     <div class="card-body">
                         <h5 class="card-title">Los ojos de mona</h5>

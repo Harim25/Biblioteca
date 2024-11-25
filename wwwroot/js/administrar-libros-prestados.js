@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    $('#TLibrosPrestados').DataTable();
+});
+
+$(document).ready(function () {
     var prestado = 0
     var entregado = 1
     var prestadoText = ""

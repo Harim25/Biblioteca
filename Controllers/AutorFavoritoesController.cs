@@ -10,24 +10,24 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Biblioteca.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    public class UsersController : Controller
+    [Authorize]
+    public class AutorFavoritoesController : Controller
     {
         private readonly BibliotecaContext _context;
 
-        public UsersController(BibliotecaContext context)
+        public AutorFavoritoesController(BibliotecaContext context)
         {
             _context = context;
         }
 
-        // GET: Users
+        // GET: AutorFavoritoes
         public async Task<IActionResult> Index()
         {
-            var bibliotecaContext = _context.Users.Include(a => a.Genero);
+            var bibliotecaContext = _context.AutorFavoritos.Include(a => a.Autor).Include(a => a.Usuario);
             return View(await bibliotecaContext.ToListAsync());
         }
 
-        // GET: Users/Details/5
+        // GET: AutorFavoritoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,42 +35,45 @@ namespace Biblioteca.Controllers
                 return NotFound();
             }
 
-            var aplicationUser = await _context.Users
-                .Include(a => a.Genero)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (aplicationUser == null)
+            var autorFavorito = await _context.AutorFavoritos
+                .Include(a => a.Autor)
+                .Include(a => a.Usuario)
+                .FirstOrDefaultAsync(m => m.UsuarioId == id);
+            if (autorFavorito == null)
             {
                 return NotFound();
             }
 
-            return View(aplicationUser);
+            return View(autorFavorito);
         }
 
-        // GET: Users/Create
+        // GET: AutorFavoritoes/Create
         public IActionResult Create()
         {
-            ViewData["GeneroId"] = new SelectList(_context.GeneroUsuarios, "Id", "Genero");
+            ViewData["AutorId"] = new SelectList(_context.Autors, "Id", "Id");
+            ViewData["UsuarioId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        // POST: Users/Create
+        // POST: AutorFavoritoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Apellidos,Edad,GeneroId,Imagen,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] AplicationUser aplicationUser)
+        public async Task<IActionResult> Create([Bind("UsuarioId,AutorId,Fecha")] AutorFavorito autorFavorito)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(aplicationUser);
+                _context.Add(autorFavorito);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GeneroId"] = new SelectList(_context.GeneroUsuarios, "Id", "Id", aplicationUser.GeneroId);
-            return View(aplicationUser);
+            ViewData["AutorId"] = new SelectList(_context.Autors, "Id", "Id", autorFavorito.AutorId);
+            ViewData["UsuarioId"] = new SelectList(_context.Users, "Id", "Id", autorFavorito.UsuarioId);
+            return View(autorFavorito);
         }
 
-        // GET: Users/Edit/5
+        // GET: AutorFavoritoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -78,23 +81,24 @@ namespace Biblioteca.Controllers
                 return NotFound();
             }
 
-            var aplicationUser = await _context.Users.FindAsync(id);
-            if (aplicationUser == null)
+            var autorFavorito = await _context.AutorFavoritos.FindAsync(id);
+            if (autorFavorito == null)
             {
                 return NotFound();
             }
-            ViewData["GeneroId"] = new SelectList(_context.GeneroUsuarios, "Id", "Genero", aplicationUser.GeneroId);
-            return View(aplicationUser);
+            ViewData["AutorId"] = new SelectList(_context.Autors, "Id", "Id", autorFavorito.AutorId);
+            ViewData["UsuarioId"] = new SelectList(_context.Users, "Id", "Id", autorFavorito.UsuarioId);
+            return View(autorFavorito);
         }
 
-        // POST: Users/Edit/5
+        // POST: AutorFavoritoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Apellidos,Edad,GeneroId,Imagen,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] AplicationUser aplicationUser)
+        public async Task<IActionResult> Edit(int id, [Bind("UsuarioId,AutorId,Fecha")] AutorFavorito autorFavorito)
         {
-            if (id != aplicationUser.Id)
+            if (id != autorFavorito.UsuarioId)
             {
                 return NotFound();
             }
@@ -103,12 +107,12 @@ namespace Biblioteca.Controllers
             {
                 try
                 {
-                    _context.Update(aplicationUser);
+                    _context.Update(autorFavorito);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AplicationUserExists(aplicationUser.Id))
+                    if (!AutorFavoritoExists(autorFavorito.UsuarioId))
                     {
                         return NotFound();
                     }
@@ -119,11 +123,12 @@ namespace Biblioteca.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GeneroId"] = new SelectList(_context.GeneroUsuarios, "Id", "Id", aplicationUser.GeneroId);
-            return View(aplicationUser);
+            ViewData["AutorId"] = new SelectList(_context.Autors, "Id", "Id", autorFavorito.AutorId);
+            ViewData["UsuarioId"] = new SelectList(_context.Users, "Id", "Id", autorFavorito.UsuarioId);
+            return View(autorFavorito);
         }
 
-        // GET: Users/Delete/5
+        // GET: AutorFavoritoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,35 +136,36 @@ namespace Biblioteca.Controllers
                 return NotFound();
             }
 
-            var aplicationUser = await _context.Users
-                .Include(a => a.Genero)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (aplicationUser == null)
+            var autorFavorito = await _context.AutorFavoritos
+                .Include(a => a.Autor)
+                .Include(a => a.Usuario)
+                .FirstOrDefaultAsync(m => m.UsuarioId == id);
+            if (autorFavorito == null)
             {
                 return NotFound();
             }
 
-            return View(aplicationUser);
+            return View(autorFavorito);
         }
 
-        // POST: Users/Delete/5
+        // POST: AutorFavoritoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var aplicationUser = await _context.Users.FindAsync(id);
-            if (aplicationUser != null)
+            var autorFavorito = await _context.AutorFavoritos.FindAsync(id);
+            if (autorFavorito != null)
             {
-                _context.Users.Remove(aplicationUser);
+                _context.AutorFavoritos.Remove(autorFavorito);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AplicationUserExists(int id)
+        private bool AutorFavoritoExists(int id)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return _context.AutorFavoritos.Any(e => e.UsuarioId == id);
         }
     }
 }

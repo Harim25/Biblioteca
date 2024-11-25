@@ -1,0 +1,49 @@
+﻿@model Biblioteca.Models.dbModels.Prestamo
+
+@{
+    ViewData["Title"] = "Eliminar Prestamos";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/administrar-elementos.css" />
+}
+
+<h1>Eliminar/Devolver</h1>
+
+<h3>¿Estas seguro de que este libro ha sido devuelto?</h3>
+<div>
+    <h4>Prestamo</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.InicioPrestamo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.InicioPrestamo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FinPrestamo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FinPrestamo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Libro)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Libro.Titulo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Usuario)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Usuario.UserName)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Libro Devuelto" class="btn btn-danger me-3" /> |
+        <a asp-action="Index" class="btn btn-dark">Volver</a>
+    </form>
+</div>

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Biblioteca.Models.dbModels.Prestamo>
+
+@{
+    ViewData["Title"] = "Prestamos";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/administrar-elementos.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+}
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="~/js/administrar-libros-prestados.js"></script>
+}
+
+<div>
+    <div id="divBtn">
+        <p>
+            <a asp-action="Create" type="button" class="btnexpo btn btn-dark" id="btnAdd">
+                Generar Nuevo Prestamo <i class="bi bi-plus"></i>
+            </a>
+        </p>
+    </div>
+    <h1>Prestamos</h1>
+</div>
+<br />
+<div>
+<table id="TLibrosPrestados" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.InicioPrestamo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FinPrestamo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Libro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.InicioPrestamo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FinPrestamo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Libro.Titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario.UserName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" type="button" class="btn btn-dark"><i class="bi bi-pencil"></i>Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id" type="button" class="btn btn-dark"><i class="bi bi-info-circle"></i>Info</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" type="button" class="btn btn-dark eliminar-btn"><i class="bi bi-trash me-1"></i>Devuelto</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
