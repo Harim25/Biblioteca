@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Biblioteca.Models.dbModels.Prestamo>
+
+@{
+    ViewData["Title"] = "Libros en Posesion";
+}
+
+<h1>Libros en Posesion</h1>
+<br />
+@if (!Model.Any())
+{
+    <div class="alert alert-info" role="alert">
+        @ViewBag.Mensaje
+    </div>
+}
+else
+{
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col mb-4">
+            <div class="card h-100">
+                <a asp-action="Details" asp-route-id="@item.Id" class="card-link">
+                    <img src="@Html.DisplayFor(modelItem => item.Libro.Imagen)" class="card-img-top libro" alt="...">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Libro.Titulo)</h5>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+}
