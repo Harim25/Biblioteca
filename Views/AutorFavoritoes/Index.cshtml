@@ -38,7 +38,7 @@ else
         {
             <div class="col mb-4">
                 <div class="card border-0">
-                    <a asp-action="Details" asp-route-id="@item.AutorId" class="card-link">
+                    <a asp-action="Details" asp-route-autorId="@item.AutorId" asp-route-usuarioId="@item.UsuarioId" class="card-link">
                         <img src="@Html.DisplayFor(modelItem => item.Autor.Imagen)" class="card-img-top rounded-circle" alt="...">
                     </a>
                     <div class="card-body">

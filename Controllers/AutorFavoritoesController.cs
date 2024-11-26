@@ -54,9 +54,9 @@ namespace Biblioteca.Controllers
         }
 
         // GET: AutorFavoritoes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? autorId, int? usuarioId)
         {
-            if (id == null)
+            if (autorId == null || usuarioId == null)
             {
                 return NotFound();
             }
@@ -64,7 +64,7 @@ namespace Biblioteca.Controllers
             var autorFavorito = await _context.AutorFavoritos
                 .Include(a => a.Autor)
                 .Include(a => a.Usuario)
-                .FirstOrDefaultAsync(m => m.UsuarioId == id);
+                .FirstOrDefaultAsync(m => m.AutorId == autorId && m.UsuarioId == usuarioId);
             if (autorFavorito == null)
             {
                 return NotFound();
@@ -128,9 +128,9 @@ namespace Biblioteca.Controllers
         }
 
         // GET: AutorFavoritoes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? autorId, int? usuarioId)
         {
-            if (id == null)
+            if (autorId == null || usuarioId == null)
             {
                 return NotFound();
             }
@@ -138,7 +138,7 @@ namespace Biblioteca.Controllers
             var autorFavorito = await _context.AutorFavoritos
                 .Include(a => a.Autor)
                 .Include(a => a.Usuario)
-                .FirstOrDefaultAsync(m => m.UsuarioId == id);
+                .FirstOrDefaultAsync(m => m.AutorId == autorId && m.UsuarioId == usuarioId);
             if (autorFavorito == null)
             {
                 return NotFound();
@@ -150,9 +150,10 @@ namespace Biblioteca.Controllers
         // POST: AutorFavoritoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int autorId, int usuarioId)
         {
-            var autorFavorito = await _context.AutorFavoritos.FindAsync(id);
+            var autorFavorito = await _context.AutorFavoritos
+             .FirstOrDefaultAsync(lf => lf.AutorId == autorId && lf.UsuarioId == usuarioId);
             if (autorFavorito != null)
             {
                 _context.AutorFavoritos.Remove(autorFavorito);
@@ -162,9 +163,9 @@ namespace Biblioteca.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AutorFavoritoExists(int id)
+        private bool AutorFavoritoExists(int autorId, int usuarioId)
         {
-            return _context.AutorFavoritos.Any(e => e.UsuarioId == id);
+            return _context.AutorFavoritos.Any(e => e.AutorId == autorId && e.UsuarioId == usuarioId);
         }
     }
 }

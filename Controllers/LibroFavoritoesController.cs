@@ -52,9 +52,9 @@ namespace Biblioteca.Controllers
         }
 
         // GET: LibroFavoritoes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? libroId, int? usuarioId)
         {
-            if (id == null)
+            if (libroId == null || usuarioId == null)
             {
                 return NotFound();
             }
@@ -62,7 +62,7 @@ namespace Biblioteca.Controllers
             var libroFavorito = await _context.LibroFavoritos
                 .Include(l => l.Libro)
                 .Include(l => l.Usuario)
-                .FirstOrDefaultAsync(m => m.UsuarioId == id);
+                .FirstOrDefaultAsync(m => m.LibroId == libroId && m.UsuarioId == usuarioId);
             if (libroFavorito == null)
             {
                 return NotFound();
@@ -126,9 +126,9 @@ namespace Biblioteca.Controllers
 
         
         // GET: LibroFavoritoes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? libroId, int? usuarioId)
         {
-            if (id == null)
+            if (libroId == null || usuarioId == null)
             {
                 return NotFound();
             }
@@ -136,7 +136,7 @@ namespace Biblioteca.Controllers
             var libroFavorito = await _context.LibroFavoritos
                 .Include(l => l.Libro)
                 .Include(l => l.Usuario)
-                .FirstOrDefaultAsync(m => m.UsuarioId == id);
+                .FirstOrDefaultAsync(m => m.LibroId == libroId && m.UsuarioId == usuarioId);
             if (libroFavorito == null)
             {
                 return NotFound();
@@ -148,21 +148,24 @@ namespace Biblioteca.Controllers
         // POST: LibroFavoritoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int libroId, int usuarioId)
         {
-            var libroFavorito = await _context.LibroFavoritos.FindAsync(id);
+            var libroFavorito = await _context.LibroFavoritos
+            .FirstOrDefaultAsync(lf => lf.LibroId == libroId && lf.UsuarioId == usuarioId);
+
             if (libroFavorito != null)
             {
                 _context.LibroFavoritos.Remove(libroFavorito);
+
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool LibroFavoritoExists(int id)
+        private bool LibroFavoritoExists(int libroId, int usuarioId)
         {
-            return _context.LibroFavoritos.Any(e => e.UsuarioId == id);
+            return _context.LibroFavoritos.Any(e => e.LibroId == libroId && e.UsuarioId == usuarioId);
         }
     }
 }
