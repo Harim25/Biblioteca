@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Biblioteca.Models.dbModels.LibroFavorito>
+
+@{
+    ViewData["Title"] = "Libros Favoritos";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/administrar-elementos.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+}
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="~/js/autoresFav.js"></script>
+}
+
+<div>
+    <div id="divBtn">
+        <p>
+            <a asp-action="Create" type="button" class="btnexpo btn btn-dark" id="btnAdd">
+                Agregar un Libro a Favoritos <i class="bi bi-plus"></i>
+            </a>
+        </p>
+    </div>
+    <h1>Libros Favoritos</h1>
+</div>
+<br />
+@if (!Model.Any())
+{
+    <div class="alert alert-info" role="alert">
+        @ViewBag.Mensaje
+    </div>
+}
+else
+{
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col mb-4">
+            <div class="card h-100">
+                <a asp-action="Details" asp-route-id="@item.LibroId" class="card-link">
+                    <img src="@Html.DisplayFor(modelItem => item.Libro.Imagen)" class="card-img-top libro" alt="...">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Libro.Titulo)</h5>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+}
