@@ -1,95 +1,28 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Biblioteca.Models.dbModels;
 
 namespace Biblioteca.Controllers
 {
     public class ExplorarController : Controller
     {
-        // GET: ExplorarController
-        public ActionResult Index()
+        private readonly BibliotecaContext _context;
+
+        public ExplorarController(BibliotecaContext context)
         {
-            return View();
-        }
-        public ActionResult ExplorarAutores()
-        {
-            return View();
-        }
-        public ActionResult ExplorarGeneros()
-        {
-            return View();
-        }
-        public ActionResult ExplorarUnGenero()
-        {
-            return View();
+            _context = context;
         }
 
-        // GET: ExplorarController/Details/5
-        public ActionResult Details(int id)
+        // GET: Inicio
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
-
-        // GET: ExplorarController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ExplorarController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ExplorarController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: ExplorarController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ExplorarController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ExplorarController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var bibliotecaContext = _context.Libros.Include(l => l.Autor).Include(l => l.Genero);
+            return View(await bibliotecaContext.ToListAsync());
         }
     }
 }
