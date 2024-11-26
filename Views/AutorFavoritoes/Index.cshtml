@@ -18,48 +18,34 @@
     <div id="divBtn">
         <p>
             <a asp-action="Create" type="button" class="btnexpo btn btn-dark" id="btnAdd">
-                Crear elemento <i class="bi bi-plus"></i>
+                Agregar un Autor a Favoritos <i class="bi bi-plus"></i>
             </a>
         </p>
     </div>
     <h1>Autores Favoritos</h1>
 </div>
 <br />
-<div>
-<table id="TAutoresFav" class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Fecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Autor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Usuario)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Autor.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario.Id)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Detalles", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Eliminar", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+@if (!Model.Any())
+{
+    <div class="alert alert-info" role="alert">
+        @ViewBag.Mensaje
+    </div>
 }
-    </tbody>
-</table>
-</div>
+else
+{
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col mb-4">
+                <div class="card border-0">
+                    <a asp-action="Details" asp-route-id="@item.AutorId" class="card-link">
+                        <img src="@Html.DisplayFor(modelItem => item.Autor.Imagen)" class="card-img-top rounded-circle" alt="...">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Autor.Nombre)</h5>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

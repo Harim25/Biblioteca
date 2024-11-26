@@ -19,7 +19,10 @@ namespace Biblioteca.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var bibliotecaContext = _context.Libros.Include(l => l.Autor).Include(l => l.Genero);
+            var bibliotecaContext = _context.Libros
+                .Include(l => l.Autor)
+                .Include(l => l.Genero)
+                .OrderByDescending(l => l.FechaCreacion); // Ordenar del más nuevo al más viejo
             return View(await bibliotecaContext.ToListAsync());
         }
 

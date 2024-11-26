@@ -2,16 +2,21 @@
     ViewData["Title"] = "Colección";
 }
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/administrar.css" />
+}
+
 @section Scripts {
     <script src="~/js/coleccion.js"></script>
 }
 
 <h1>Colección</h1>
-<h2 class="mb-3">Libros favoritos</h2>
-<div id="libros" class="tabla">
-    <!-- Contenido, se debe de hacer una consulta de todos los libros favoritos del usuario, la plantilla está en el js -->
-</div>
-<h2 class="mt-5 mb-3">Autores favoritos</h2>
-<div id="autores" class="tabla">
-    <!-- Igual con los autores -->
+<br />
+<div id="contbtns">
+    <a asp-controller="AutorFavoritoes" asp-action="Index" type="button" class="btns btn btn-dark">
+        Autores Favoritos
+    </a>
+    <a asp-controller="Autors" asp-action="Index" type="button" class="btns btn btn-dark">
+        Libros Favoritos
+    </a>
 </div>

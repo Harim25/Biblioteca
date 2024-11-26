@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Biblioteca.Models.dbModels;
 using Microsoft.AspNetCore.Authorization;
+using Biblioteca.Models.DTO;
+using Biblioteca.Models.ViewModels;
+using System.Security.Claims;
 
 namespace Biblioteca.Controllers
 {
@@ -23,8 +26,31 @@ namespace Biblioteca.Controllers
         // GET: AutorFavoritoes
         public async Task<IActionResult> Index()
         {
-            var bibliotecaContext = _context.AutorFavoritos.Include(a => a.Autor).Include(a => a.Usuario);
-            return View(await bibliotecaContext.ToListAsync());
+            // Obtén el ID del usuario logueado como string
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // Convierte el ID del usuario a entero
+            if (!int.TryParse(userIdString, out int userId))
+            {
+                // Manejo de error si la conversión falla (opcional)
+                return Unauthorized();
+            }
+
+            // Filtra los préstamos por el usuario logueado
+            var bibliotecaContext = _context.AutorFavoritos
+                .Include(a => a.Autor)
+                .Include(a => a.Usuario)
+                .Where(a => a.UsuarioId == userId);
+
+            var autorFavorito = await bibliotecaContext.ToListAsync();
+
+            // Si no hay favoritos, define un mensaje
+            if (!autorFavorito.Any())
+            {
+                ViewBag.Mensaje = "De momento no tienes autores favoritos";
+            }
+
+            return View(autorFavorito);
         }
 
         // GET: AutorFavoritoes/Details/5
@@ -50,9 +76,12 @@ namespace Biblioteca.Controllers
         // GET: AutorFavoritoes/Create
         public IActionResult Create()
         {
-            ViewData["AutorId"] = new SelectList(_context.Autors, "Id", "Id");
-            ViewData["UsuarioId"] = new SelectList(_context.Users, "Id", "Id");
-            return View();
+            AutorFavoritoViewModel model = new AutorFavoritoViewModel
+            {
+                AutorFavoritoCreate = new AutorFavoritoCreateDTO(),
+                SelectListsAutores = new SelectList(_context.Autors, "Id", "Nombre"),
+            };
+            return View(model);
         }
 
         // POST: AutorFavoritoes/Create
@@ -60,72 +89,42 @@ namespace Biblioteca.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UsuarioId,AutorId,Fecha")] AutorFavorito autorFavorito)
+        public async Task<IActionResult> Create(AutorFavoritoCreateDTO autorFavoritoCreate)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(autorFavorito);
+                // Obtener el ID del usuario logueado
+                var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                // Verificar y convertir el ID a entero
+                if (!int.TryParse(userIdString, out int userId))
+                {
+                    // Manejo de error si el ID no es válido
+                    return Unauthorized();
+                }
+
+                // Crear el objeto AutorFavorito con el usuario actual
+                AutorFavorito autorFavorito = new AutorFavorito
+                {
+                    AutorId = autorFavoritoCreate.AutorId,
+                    Fecha = DateTime.Now,
+                    UsuarioId = userId // Asigna el ID del usuario logueado
+                };
+
+                // Guardar en la base de datos
+                _context.AutorFavoritos.Add(autorFavorito);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AutorId"] = new SelectList(_context.Autors, "Id", "Id", autorFavorito.AutorId);
-            ViewData["UsuarioId"] = new SelectList(_context.Users, "Id", "Id", autorFavorito.UsuarioId);
-            return View(autorFavorito);
-        }
 
-        // GET: AutorFavoritoes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
+            // En caso de error, retornar la vista con los datos iniciales
+            AutorFavoritoViewModel model = new()
             {
-                return NotFound();
-            }
-
-            var autorFavorito = await _context.AutorFavoritos.FindAsync(id);
-            if (autorFavorito == null)
-            {
-                return NotFound();
-            }
-            ViewData["AutorId"] = new SelectList(_context.Autors, "Id", "Id", autorFavorito.AutorId);
-            ViewData["UsuarioId"] = new SelectList(_context.Users, "Id", "Id", autorFavorito.UsuarioId);
-            return View(autorFavorito);
-        }
-
-        // POST: AutorFavoritoes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UsuarioId,AutorId,Fecha")] AutorFavorito autorFavorito)
-        {
-            if (id != autorFavorito.UsuarioId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(autorFavorito);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AutorFavoritoExists(autorFavorito.UsuarioId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["AutorId"] = new SelectList(_context.Autors, "Id", "Id", autorFavorito.AutorId);
-            ViewData["UsuarioId"] = new SelectList(_context.Users, "Id", "Id", autorFavorito.UsuarioId);
-            return View(autorFavorito);
+                AutorFavoritoCreate = autorFavoritoCreate,
+                SelectListsAutores = new SelectList(_context.Autors, "Id", "Nombre"),
+            };
+            return View(model);
         }
 
         // GET: AutorFavoritoes/Delete/5

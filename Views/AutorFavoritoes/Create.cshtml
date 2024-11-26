@@ -1,36 +1,40 @@
-﻿@model Biblioteca.Models.dbModels.AutorFavorito
+﻿@using Biblioteca.Models.ViewModels
+@model AutorFavoritoViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Agregar a Favoritos";
 }
 
-<h1>Create</h1>
+@section Styles {
+    <link rel="stylesheet" href="~/css/administrar-elementos.css" />
+}
 
-<h4>AutorFavorito</h4>
+<h1>Agregar a Favoritos</h1>
+
+<h4>Autor Favorito</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="UsuarioId" class="control-label"></label>
-                <select asp-for="UsuarioId" class ="form-control" asp-items="ViewBag.UsuarioId"></select>
+                <label asp-for="AutorFavoritoCreate.AutorId" class="control-label"></label>
+                <select asp-for="AutorFavoritoCreate.AutorId" class="form-control" asp-items="Model.SelectListsAutores"></select>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="AutorId" class="control-label"></label>
-                <select asp-for="AutorId" class ="form-control" asp-items="ViewBag.AutorId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Agregar" class="btn btn-dark" />
             </div>
         </form>
     </div>
 </div>
-
+<br />
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-dark">Volver</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
