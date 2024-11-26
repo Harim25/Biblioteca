@@ -1,349 +1,45 @@
-﻿@{
+﻿@model IEnumerable<Biblioteca.Models.dbModels.Libro>
+
+@{
     ViewData["Title"] = "Inicio";
 }
 
-<h1>Inicio</h1>
-<h2 class="mb-3">Libros</h2>
-<div class="tabla">
-    <!-- los 10 mas gustados del mes -->
-    <div class="card">
-        <a href="Pantallas/vista-libro.html" class="card-link">
-            <img src="Imagenes/Prueba/Autores/Ana Frank.jpg" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">Ana de las tejas verdes</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Batman Demned.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">Batman Demned</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/El diario de Ana Frank.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">El diario de Ana Frank</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/El libro de Bill.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">El libro de Bill</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/El principito.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">El principito</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Harry Potter y la piedra filosofal.png" class="card-img-top libro"
-                 alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">Harry Potter y la piedra filosofal</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/It.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">It</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/La niebla.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">La niebla</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Los ojos de mona.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">Los ojos de mona</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Lugares asombrosos.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">Lugares asombrosos</h5>
-        </div>
-    </div>
+<h1>Index</h1>
+<br />
+<div>
+    <h2 class="mb-3">Nuestros Ultimos Libros</h2>
 </div>
-<h2 class="mt-5 mb-3">Novedades</h2>
-<div class="tabla">
-    <!-- los 10 mas nuevos -->
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Autores/Ana Frank.jpg" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">Ana de las tejas verdes</h5>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col mb-4">
+            <div class="card h-100">
+                <a asp-controller="LibroLectores" asp-action="Details" asp-route-id="@item.Id" class="card-link">
+                    <img src="@Html.DisplayFor(modelItem => item.Imagen)" class="card-img-top libro" alt="...">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Titulo)</h5>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Batman Demned.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">Batman Demned</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/El diario de Ana Frank.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">El diario de Ana Frank</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/El libro de Bill.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">El libro de Bill</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/El principito.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">El principito</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Harry Potter y la piedra filosofal.png" class="card-img-top libro"
-                 alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">Harry Potter y la piedra filosofal</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/It.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">It</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/La niebla.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">La niebla</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Los ojos de mona.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">Los ojos de mona</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Lugares asombrosos.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">Lugares asombrosos</h5>
-        </div>
-    </div>
+    }
 </div>
-<h2 class="mt-5 mb-3">Top semanal</h2>
-<div class="tabla">
-    <!-- los 10 mas pedidos de la semana -->
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Autores/Ana Frank.jpg" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">Ana de las tejas verdes</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Batman Demned.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">Batman Demned</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/El diario de Ana Frank.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">El diario de Ana Frank</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/El libro de Bill.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">El libro de Bill</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/El principito.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">El principito</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Harry Potter y la piedra filosofal.png" class="card-img-top libro"
-                 alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">Harry Potter y la piedra filosofal</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/It.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">It</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/La niebla.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">La niebla</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Los ojos de mona.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">Los ojos de mona</h5>
-        </div>
-    </div>
-    <div class="card">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Lugares asombrosos.png" class="card-img-top libro" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title">Lugares asombrosos</h5>
-        </div>
-    </div>
+
+<div>
+    <h2 class="mt-5 mb-3">Mejores Autores</h2>
 </div>
-<h2 class="mt-5 mb-3">Top semanal de autores</h2>
-<div class="tabla">
-    <!-- los 10 autores mas populares de los libros mas pedidos de la semana -->
-    <div class="card border-0">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Autores/Ana Frank.jpg" class="card-img-top rounded-circle" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title text-center">Ana Frank</h5>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col mb-4">
+            <div class="card border-0">
+                <a asp-controller="AutorLectores" asp-action="Details" asp-route-id="@item.AutorId" class="card-link">
+                    <img src="@Html.DisplayFor(modelItem => item.Autor.Imagen)" class="card-img-top rounded-circle" alt="...">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title text-center">@Html.DisplayFor(modelItem => item.Autor.Nombre)</h5>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="card border-0">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Autores/Edgar Allan Poe.jpeg" class="card-img-top rounded-circle"
-                 alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title text-center">Edgar Allan Poe</h5>
-        </div>
-    </div>
-    <div class="card border-0">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Autores/H. P. Lovecraft.jpg" class="card-img-top rounded-circle"
-                 alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title text-center">H. P. Lovecraft</h5>
-        </div>
-    </div>
-    <div class="card border-0">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Autores/J. K. Rowling.jpeg" class="card-img-top rounded-circle" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title text-center">J. K. Rowling</h5>
-        </div>
-    </div>
-    <div class="card border-0">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Autores/J. R. R. Tolkien.png" class="card-img-top rounded-circle"
-                 alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title text-center">J. R. R. Tolkien</h5>
-        </div>
-    </div>
-    <div class="card border-0">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Autores/Julio Verne.jpeg" class="card-img-top rounded-circle" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title text-center">Julio Verne</h5>
-        </div>
-    </div>
-    <div class="card border-0">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Autores/Lewis Carroll.jpeg" class="card-img-top rounded-circle" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title text-center">Lewis Carroll</h5>
-        </div>
-    </div>
-    <div class="card border-0">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Autores/Lucy Maud Montgomery.jpeg" class="card-img-top rounded-circle"
-                 alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title text-center">Lucy Maud Montgomery</h5>
-        </div>
-    </div>
-    <div class="card border-0">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Autores/Sor Juana Ines de la Cruz.jpg" class="card-img-top rounded-circle"
-                 alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title text-center">Sor Juana Ines de la Cruz</h5>
-        </div>
-    </div>
-    <div class="card border-0">
-        <a href="" class="card-link">
-            <img src="Imagenes/Prueba/Autores/Stephen King.jpg" class="card-img-top rounded-circle" alt="...">
-        </a>
-        <div class="card-body">
-            <h5 class="card-title text-center">Stephen King</h5>
-        </div>
-    </div>
+    }
 </div>

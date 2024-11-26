@@ -1,5 +1,7 @@
 using Biblioteca.Models;
+using Biblioteca.Models.dbModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Biblioteca.Controllers
@@ -7,16 +9,20 @@ namespace Biblioteca.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly BibliotecaContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, BibliotecaContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var bibliotecaContext = _context.Libros.Include(l => l.Autor).Include(l => l.Genero);
+            return View(await bibliotecaContext.ToListAsync());
         }
+
         public ActionResult AccesoDenegado()
         {
             return View();
